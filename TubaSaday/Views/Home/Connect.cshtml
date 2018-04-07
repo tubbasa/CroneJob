@@ -1,0 +1,42 @@
+﻿@model TubaSaday.Models.ConnectionString
+
+@{
+    ViewBag.Title = "Connect";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Connect</h2>
+
+
+<script src="@Url.Content("http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+<div class="jumbotron">
+    <h1>Tuba Saday</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Challange Codes</h2>
+        <p>Aşağıda bulunan textbox'a lütfen connection stringinizi yazınız...</p>
+
+        <div id="result"></div>
+        @using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "result" }))
+        {
+            @Html.EditorFor(x => x.connectionString)
+            @Html.ValidationMessageFor(x => x.connectionString)
+            <input type="submit" value="Bağlan" />
+        }
+
+
+    </div>
+</div>
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

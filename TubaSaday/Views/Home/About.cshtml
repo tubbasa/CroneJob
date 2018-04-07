@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Tuba SADAY B2C Challenge";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<br />
+<div>
+    <h4><bold>Veri tabanı nasıl yaratılır?</bold></h4>
+    <p>
+        Projeyi çalıştırdığınızda veri tabanı eğer sisteminizde kayıtlı değil ise sizi connection string girebileceğiniz Home/Connect sayfasına yönlendirecektir. Buraya connection string yazıp butona bastığınızda veri tabanını oluşturacak ve ilk oluşumdan sonra cache’e alınacaktır.
+        Aşağıda bulunan connection stringin Data Source'unu kendi bilgisayarınızın mssql Server Name'ini yazmalısınız.
+        Data Source=DESKTOP-L9H3O6P;Initial Catalog=TubaSaday;Integrated Security=SSPI;
+    </p>
+</div>
+<div>
+    <h4><bold>İlk cache neden global asax yerine index’de yapıldı?</bold></h4>
+    <p>Global asax dosyasında context yaratılmamış olduğu için dolayısıyla kontrol sağlanamaz ve sürekli olarak context null döner. Db runtime yaratıldığı için context kontrolü, yaratımı ve başlangıç controllerı olarak index’te yaratılmıştır. Db runtime yapılmasaydı (application başlanmadan veritabanı oluşsa idi) ilk cache global asax’da çalışacaktı.  </p>
+</div>
+<div>
+    <h4><bold>Frontend’de yenilenen cache sağlaması nasıl yapıldı?</bold></h4>
+    <p>Backend’de güncellenen model frontend’de cron job interval’ı süresince refreshlendi.  </p>
+</div>
+<div>
+    <h4><bold>Cache yenilendiği nasıl anlaşılır?</bold></h4>
+    <p>List sayfasını açıp veritabanında değişiklik yapıyoruz.Cron Job'u yenileme süresi 3 dakika olduğu için updated timeları 3 dakika öncesinden sonra olan veriler çekilecektir. Lütfen veri tabanında dğeişiklik yaparken şuanki saatten 3  dakika öncesine kadar olan bir sata dilimi giriniz. 
+        Bu işlemleri yaptıktan sonra bekliyoruz, interval süresi dolduğunda sayfa yenilenecek ve değiştirilen entryler ekrana yansıyacaktır. </p>
+</div>
+<div>
+    <h4><bold>Cronjob süresi ne kadardır?</bold></h4>
+    <p>Zaman kaybı olmaması açısından cronjob'un interval süresi 3 dakika olarak tanımlanmıştır. Eğer değiştirilmek istenir ise Cronjob klasörü içerisindeki trigger classında yer alan 22.satırdaki değer değiştirilebilir.   </p>
+</div>
+<div>
+    <h4><bold>Dikkat edilmesi gerekenler</bold></h4>
+    <p>Cronjob süresi değiştirildiği takdirde (triggerda bulunan değer) job classında bulunan (35.satır) değer de aynı şekilde değiştirilmelidir. </p>
+</div>
+
+
+
+
